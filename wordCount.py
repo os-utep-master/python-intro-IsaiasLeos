@@ -1,6 +1,7 @@
-import os
-import re
-import sys
+import sys        # command line arguments
+import re         # regular expression tools
+import os         # checking if file exists
+
 
 #Checks the amount of argument variables given when executing this program.
 if len(sys.argv) is not 3:
@@ -11,3 +12,12 @@ if len(sys.argv) is not 3:
 inputName = sys.argv[1]
 outputName = sys.argv[2]
 words = {}
+
+#Checks if the following output file exists
+if not os.path.exists(outputName):
+    print("Output %s file doesn't exist! Terminating..." % outputName)
+    exit()
+
+with open(inputName,'r') as words:
+    for line in words:
+        print(line)
