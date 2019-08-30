@@ -2,20 +2,15 @@ import sys        # command line arguments
 import re         # regular expression tools
 import os         # checking if file exists
 
-# Checks the amount of argument variables given.
-if len(sys.argv) is not 3:
-    print("Usage: wordCount.py <input> <output>")
-    exit()
-
-# Save argument to variables.
+# Save argument to variables
 inputName = sys.argv[1]
 outputName = sys.argv[2]
 wordDictionary = {}
 
 # Checks if the following output.txt file exists
 if not os.path.exists(outputName):
-    print("Output %s file doesn't exist! Terminating..." % outputName)
-    exit()
+    print("File output.txt %s doesn't exist! Terminating..." % outputName)
+    exit() #Exit program
 
 with open(inputName, 'r') as input:  # Read the file
     for line in input:  # Assign each line from 'input' into the variable 'line'
@@ -23,7 +18,7 @@ with open(inputName, 'r') as input:  # Read the file
         # Remove commas, periods, and new lines
         line = re.sub('[,.\n]', '', line)
         line = line.lower()  # make sentence lowercase
-        
+
         # Split the 'line' variable by blank spaces
         line = line.split(' ')
 
@@ -35,4 +30,9 @@ with open(inputName, 'r') as input:  # Read the file
             else:
                 # Add word to dictionary
                 wordDictionary[word] = 1
-print(wordDictionary)
+
+wordDictionary.pop('') # Pop unexpected word empty space in dictionary
+output = open(outputName,'a+') # Open file to write to in 'appending mode'
+for key in sorted(wordDictionary): # Iterate through a sorted dictionary
+    output.write(key + ' ' + str(wordDictionary[key]) + "\n") # Write to file in a correct format
+output.close() # Close opened file
