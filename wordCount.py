@@ -15,9 +15,8 @@ if not os.path.exists(outputName):
 with open(inputName, 'r') as input:  # Read the file
     for line in input:  # Assign each line from 'input' into the variable 'line'
 
-        # Remove commas, periods, and new lines
-        line = re.sub('[,.\n]', '', line)
-        line = line.lower()  # make sentence lowercase
+        # Remove punctuation and make sentence lowercase
+        line = re.sub('[^A-Za-z]+', ' ', line).lower()
 
         # Split the 'line' variable by blank spaces
         line = line.split(' ')
