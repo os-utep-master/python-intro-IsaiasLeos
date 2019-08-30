@@ -22,5 +22,9 @@ with open(inputName, 'r') as input:  # Read the file as assign its value inside 
         
         # Remove commas, periods, and new lines and also make sentence lowercase
         line = re.sub('[,.\n]', '', line).lower()
+
+        # Split the 'line' variable by blank spaces and assign it into the variable 'split'
+        line = line.split(' ')
         
+
 print(wordDictionary)
